@@ -1,0 +1,23 @@
+minikube delete
+cd /opt/spark
+./bin/docker-image-tool.sh -p ./kubernetes/dockerfiles/spark/bindings/python/Dockerfile -r jgckruger -t v3.0.1 build
+docker build --pull --rm -f "driver-pod/Dockerfile" -t jgckruger/my-notebook:latest "driver-pod"
+minikube start --cpus 6 --memory 6000
+ssh -i $(minikube ssh-key) docker@$(minikube ip) 
+sudo mkdir /mnt/data
+sudo sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
+logout
+kubectl create namespace spark
+kubectl create serviceaccount spark -n spark
+kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount=spark:spark --namespace=spark
+kubectl apply -f k8s/pv-volume.yaml
+kubectl apply -f k8s/pv-claim.yaml
+kubectl apply -f k8s/deploy.yaml
+helm init
+helm install hadoop stable/hadoop --version 1.1.2 --namespace spark
+helm install --namespace spark --set hadoop.useConfigMap=true,hadoop.configMapName=hadoop-hadoop stable/zeppelin
+kubectl get all -n spark
+kubectl port-forward -n spark deployment.apps/my-notebook-deployment 8888:8888
+kubectl port-forward -n spark service/hadoop-hadoop-yarn-ui 8088:8088
+kubectl port-forward -n spark service/hadoop-hadoop-hdfs-nn 50070:50070
+kubectl exec --stdin --tty hadoop-hadoop-hdfs-nn-0 -n spark -- /bin/bash

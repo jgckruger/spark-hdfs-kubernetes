@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: spark
+  name: my-notebook-deployment
+  labels:
+    app: my-notebook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-notebook
+  template:
+    metadata:
+      labels:
+        app: my-notebook
+    spec:
+      serviceAccountName: spark
+      containers:
+      - name: my-notebook
+        image: jgckruger/my-notebook:latest
+        ports:
+          - containerPort: 8888
+        volumeMounts:
+          - mountPath: /root/data
+            name: task-pv-storage
+        workingDir: /root
+        resources:
+          limits:
+            memory: 2Gi
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: spark
+  name: my-notebook-deployment
+spec:
+  selector:
+    app: my-notebook
+  ports:
+    - protocol: TCP
+      port: 29413
+  clusterIP: None
