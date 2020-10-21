@@ -5,9 +5,12 @@ then
    minikube delete
 fi
 
-minikube start --cpus 8 --memory 8192 
+data_dir=$(echo $(cd .. && pwd)/data:/data)
+minikube start --cpus 8 --memory 8192
+echo "Mounting folder" $data_dir " to cluster"
+minikube mount $data_dir &
+echo "Mounted"
 ssh -oStrictHostKeyChecking=no -i $(minikube ssh-key) docker@$(minikube ip) <<-'ENDSSH'
-   sudo mkdir /mnt/data
-   sudo sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html" =y
+   sudo sh -c "echo 'Test file to kubernetes' > /data/index.html" =y
 ENDSSH
 echo "Kubernetes is up"
