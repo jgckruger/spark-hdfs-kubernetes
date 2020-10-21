@@ -73,5 +73,5 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local
 
 EXPOSE 4040 4041 8080 8888 
 
-CMD ["notebook", "--no-browser", "--allow-root", "--ip=0.0.0.0", "--port=8888"]
+CMD ["notebook", "--no-browser", "--allow-root", "--ip=0.0.0.0", "--port=8888", "--notebook_dir='/data'"]
 ENTRYPOINT ["/usr/local/bin/jupyter"]

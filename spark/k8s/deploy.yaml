@@ -27,7 +27,7 @@ spec:
         workingDir: /
         resources:
           limits:
-            memory: 10Gi
+            memory: 2Gi
       volumes:
         - name: task-pv-storage
           persistentVolumeClaim:
