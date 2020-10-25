@@ -1,0 +1,6 @@
+hadoop/Chart.yaml
+hadoop-1.1.2.tgz
+hadoop/info.md
+hadoop/README.md
+hadoop/values.yaml
+hadoop/templates/*
