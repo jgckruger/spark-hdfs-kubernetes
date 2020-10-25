@@ -1,0 +1,25 @@
+---
+# Source: hadoop/templates/yarn-nm-svc.yaml
+# A headless service to create DNS records
+apiVersion: v1
+kind: Service
+metadata:
+  name: hadoop-hadoop-yarn-nm
+  labels:
+    app: hadoop
+    chart: hadoop-1.1.2
+    release: hadoop
+    component: yarn-nm
+spec:
+  ports:
+  - port: 8088
+    name: web
+  - port: 8082
+    name: web2
+  - port: 8042
+    name: api
+  clusterIP: None
+  selector:
+    app: hadoop
+    release: hadoop
+    component: yarn-nm

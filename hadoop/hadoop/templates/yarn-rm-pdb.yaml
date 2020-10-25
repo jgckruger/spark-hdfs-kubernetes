@@ -1,0 +1,18 @@
+---
+# Source: hadoop/templates/yarn-rm-pdb.yaml
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: hadoop-hadoop-yarn-rm
+  labels:
+    app: hadoop
+    chart: hadoop-1.1.2
+    release: hadoop
+    component: yarn-rm
+spec:
+  selector:
+    matchLabels:
+      app: hadoop
+      release: hadoop
+      component: yarn-rm
+  minAvailable: 1
