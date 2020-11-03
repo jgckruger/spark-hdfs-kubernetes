@@ -6,7 +6,7 @@ then
 fi
 
 data_dir=$(echo $(cd .. && pwd)/data:/data)
-minikube start --cpus 8 --memory 8192
+minikube start --cpus 8 --memory 16384
 echo "Mounting folder" $data_dir " to cluster"
 minikube mount $data_dir &
 echo "Mounted"
