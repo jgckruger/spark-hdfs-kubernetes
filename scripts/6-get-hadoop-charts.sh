@@ -1,5 +1,8 @@
 rm -rf ../hadoop/hadoop/templates ../hadoop/hadoop/values.yaml ../hadoop/hadoop/Chart.yaml ../hadoop/hadoop/README.md ../hadoop/hadoop/info.md ../hadoop/hadoop/hadoop-1.1.2.tgz
-helm template hadoop stable/hadoop --version 1.1.2 --output-dir=../hadoop
+helm template hadoop stable/hadoop  \
+        --version 1.1.2 \
+        --output-dir=../hadoop \
+        --set hdfs.dataNode.replicas=3
 helm show values stable/hadoop --version=1.1.2 > ../hadoop/hadoop/values.yaml
 helm show chart stable/hadoop --version=1.1.2 > ../hadoop/hadoop/Chart.yaml
 helm show readme stable/hadoop --version=1.1.2 > ../hadoop/hadoop/README.md
