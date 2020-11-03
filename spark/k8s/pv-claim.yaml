@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: spark
-  name: task-pv-claim
+  name: pv-claim
 spec:
   storageClassName: manual
   accessModes:

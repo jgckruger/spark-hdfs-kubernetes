@@ -23,15 +23,15 @@ spec:
           - containerPort: 8888
         volumeMounts:
           - mountPath: /data
-            name: task-pv-storage
+            name: pv-storage
         workingDir: /
         resources:
           limits:
             memory: 2Gi
       volumes:
-        - name: task-pv-storage
+        - name: pv-storage
           persistentVolumeClaim:
-            claimName: task-pv-claim
+            claimName: pv-claim
 ---
 apiVersion: v1
 kind: Service

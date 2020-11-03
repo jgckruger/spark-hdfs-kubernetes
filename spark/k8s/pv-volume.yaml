@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   namespace: spark
-  name: task-pv-volume
+  name: pv-volume
   labels:
     type: local
 spec:
