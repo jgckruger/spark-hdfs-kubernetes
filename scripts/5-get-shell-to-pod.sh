@@ -11,7 +11,8 @@ else
 
     if [ $service = "spark" ]
     then
-        kubectl exec -n hadoop --stdin --tty hadoop-hadoop-hdfs-nn-0 -- /bin/bash
+        # TODO: properly set the name of the spark pod
+        kubectl exec -n spark --stdin --tty my-notebook-deployment -- /bin/bash
     fi
 
     if [ $service = "hadoop" ]
