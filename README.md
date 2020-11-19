@@ -40,7 +40,12 @@ After this, you need to wait for the pods to be in the running state. This takes
   $ kubectl get all -n hadoop
 ```
 
-After the pods are up, you can either get a shell into a pod using the included script or access _http://localhost:8888_ and use the Jupyter UI (default password is _jupyter_)
+After the pods are up, you can forward the ports using the included script 
+```
+  $ ./4-port-forward.sh
+```
+
+Having the ports forwarded to your local machine, you can either get a shell into a pod using the included script or access _http://localhost:8888_ and use the Jupyter UI (default password is _jupyter_)
 
 There are some sample spark codes at /spark such as /spark/_pog.py_ and /spark/_sample.py_. You need to copy them over to the /data folder if you want to work with it. 
 
