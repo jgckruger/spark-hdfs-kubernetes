@@ -2,6 +2,7 @@
 Spark + Jupyter + Zeppelin on a Kubernetes environment for development using the Apache stack for Big Data :)
 
 # Why
+Testing purposes mostly. HDFS is normally running under a YARN cluster. Since Spark got Kubernetes support since v2.4, I wanted to test how HDFS would perform in a new cluster engine.
 
 # How does it work?
 This repo contains a series of scripts at the folder /scripts that
